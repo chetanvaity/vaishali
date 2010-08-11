@@ -38,6 +38,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    render :layout => "simile"
   end
 
   def edit
