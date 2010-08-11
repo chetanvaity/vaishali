@@ -1,0 +1,21 @@
+<h1>Event#edit</h1>
+
+<% form_for(@event) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :start %><br />
+    <%= f.text_field :start %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+
+<% end %>
+
+<%= link_to 'Back', events_path %>
+

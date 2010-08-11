@@ -1,0 +1,49 @@
+body {
+  background-color: #EAEDE1;
+  color: #000000;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+#centerbox {
+  margin: auto;
+  width: 974px;
+  background: #FFFFFF;
+  border: 1px solid #EAEDE1;
+  padding: 10px;
+}
+
+#header {
+}
+
+#rect1 {
+  background: transparent url(/images/rect-green.png);
+  height: 30px;
+  width: 954px;
+  border: 1px solid #EAEDE1;
+  margin: 10px 1px 1px 1px;
+  padding: 10px;
+  font-size: 180%;
+  color: #FFFFFF;
+  text-align: left;
+}
+#rect2 {
+  background: transparent url(/images/rect-grey.png);
+  height: 30px;
+  width: 954px;
+  border: 1px solid #EAEDE1;
+  margin: 1px;
+  padding: 10px;
+  font-size: 180%;
+  color: #FFFFFF;
+  text-align: left;
+}
+
+#rect3 {
+  width: 954px;
+  border: 1px solid #EAEDE1;
+  margin: 10px 1px;
+  padding: 30px 10px;
+}
