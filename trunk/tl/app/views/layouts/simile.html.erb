@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 //EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+<title>Timeline</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<script>
+  Timeline_ajax_url="/javascripts/simile/timeline_ajax/simile-ajax-api.js";
+  Timeline_urlPrefix='/javascripts/simile/timeline_js/';
+  Timeline_parameters='bundle=true';
+</script> 
+
+<%= javascript_include_tag "simile/timeline_js/timeline-api.js" %>
+<%= stylesheet_link_tag "layout" %>
+<%= stylesheet_link_tag "simile" %>
+</head>
+
+<body onload="onLoad();" onresize="onResize();">
+
+<div id="centerbox" align="center">
+
+  <div id="header">
+    <div id="rect1">
+      Timeline
+    </div>
+    <div id="rect2">
+    </div>
+  </div>
+
+  <div id="rect3" align="center">
+  <%= yield %>
+  </div>
+
+</div> <!-- master ends -->
+
+</body>
+
+</html>

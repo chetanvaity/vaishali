@@ -1,0 +1,63 @@
+<div id="timeline-with-buttons">
+    <div id="buttons">
+      <a href="/events/new/"><div id="new-event-button"></div></a>
+      <div id="button-terminator"></div>
+      <div class="clear"></div>
+    </div>
+    
+    <div id="my-timeline"></div>
+    <noscript>
+    This page uses Javascript to show you a Timeline. Please enable Javascript in your browser to see the full page. Thank you.
+    </noscript>
+</div>
+   
+    <script>
+      var tl;
+      function onLoad() {
+        var eventSource = new Timeline.DefaultEventSource();
+        var theme = Timeline.ClassicTheme.create(); // create the theme
+        theme.event.track.gap = 8;
+        theme.event.track.height = 1;
+        theme.event.duration.color = "#998000";
+        theme.event.instant.icon = "images/green-circle.png";
+        //theme.event.label.lineColor = "#225915"; - NOT WORKING
+        theme.event.label.width = 400;
+        theme.event.label.offsetFromLine = 7;
+
+        var bandInfos = [
+          Timeline.createBandInfo({
+             eventSource:    eventSource,
+             date:           "Jan 01 1990 00:00:00 GMT",
+             width:          "85%", 
+             intervalUnit:   Timeline.DateTime.YEAR, 
+             intervalPixels: 50,
+             theme:          theme,
+             backgroundColor: "#D8CAA8"
+             }),
+          Timeline.createBandInfo({
+             date:           "Jan 01 1990 00:00:00 GMT",
+             eventSource:    eventSource,
+             width:          "15%", 
+             intervalUnit:   Timeline.DateTime.DECADE, 
+             intervalPixels: 100,
+             theme:          theme,
+             layout:         'overview'
+             })
+        ];
+        bandInfos[1].syncWith = 0;
+        bandInfos[1].highlight = true;
+
+        tl = Timeline.create(document.getElementById("my-timeline"), bandInfos);
+        Timeline.loadXML("simile.gen.xml", function(xml, url) { eventSource.loadXML(xml, url); });
+      }
+
+      var resizeTimerID = null;
+      function onResize() {
+         if (resizeTimerID == null) {
+             resizeTimerID = window.setTimeout(function() {
+                 resizeTimerID = null;
+                 tl.layout();
+             }, 500);
+         }
+      }
+    </script>

@@ -1,0 +1,124 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* ------------ SIMILE TIMELINE properties --------------- */
+
+/* ether bands properties */
+
+.timeline-ether-bg{width:100%; height:100%;}
+.timeline-band-0 .timeline-ether-bg{background-color:#C5CCA3}
+.timeline-band-1 .timeline-ether-bg{background-color:#284907}
+.timeline-band-2 .timeline-ether-bg{background-color:#D8CAA8}
+
+.timeline-ether-highlight{position:absolute; background-color:#CCFF99;}
+
+.timeline-date-label {
+      color: #FFFFFF;
+}
+
+/* event bubble styling */
+
+.timeline-event-bubble-title {
+  color: #528F29;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 0.7em;
+}   
+.timeline-event-bubble-title a:link {
+  color: #528F29;
+  text-decoration: none;
+}
+.timeline-event-bubble-title a:visited {
+  color: #528F29;
+  text-decoration: none;
+}
+.timeline-event-bubble-title a:hover {
+  font-weight: bold;
+  color: #183604;
+}
+
+.timeline-event-bubble-body {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 0.7em;
+  text-align: left;
+}
+.timeline-event-bubble-body a {
+  text-decoration: none;
+}
+.timeline-event-bubble-body a:link {
+  text-decoration: none;
+}
+.timeline-event-bubble-body a:hover {
+  font-weight: bold;
+  color: #183604;
+}
+.timeline-event-bubble-time {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: .7em;
+  font-style: italic;
+  color: #998000;
+}
+.timeline-event-bubble-wiki {
+  color: #528F29;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 0.7em;
+}
+.timeline-event-bubble-wiki a:link {
+  color: #183604;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 0.8em;
+  font-style: bold;
+}
+.simileAjax-bubble-close-pngTranslucent {
+    background: url(/simile/images/close-button.png) no-repeat;
+}
+
+
+
+/* --------------- OTHER --------------------------------- */
+/* The font family size and color applies to the labels of the timeline events */
+
+#my-timeline {
+  height: 300px;
+  width: 800px;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-bottom-style: none;
+  border-top-color: #000000;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 0.7em;
+  color: #183604;
+  border-right-width: 1px;
+  border-left-width: 1px;
+  border-right-style: solid;
+  border-left-style: solid;
+  border-right-color: #000000;
+  border-left-color: #000000;
+}
+
+#buttons {
+    /*position: relative;
+    left: -350px;*/
+    /*height: 18px;*/
+    width: 800px;
+    color: #183604;
+}
+
+#new-event-button {
+    /*position: relative;*/
+    height: 16px;
+    width: 16px;
+    float: left;
+    /*margin: 0px;*/
+    background: url(/images/new-button.png) no-repeat;
+}
+
+#button-terminator {
+    /*position: relative;*/
+    /*float: left;*/
+    height: 16px;
+    width: 16px;
+    float: left;
+    background: url(/images/terminator.png) no-repeat;
+}
+
+.clear { clear: both;}
