@@ -3,11 +3,7 @@ class EventsController < ApplicationController
     @events = Event.find(:all, :order => "start")
   end
 
-  def tl
-    @events = Event.find(:all, :order => "start")
-  end
-
-  def simile
+  def simile 
     @events = Event.find(:all, :order => "start")
     
     f = File.new("public/simile.gen.xml", "w")
@@ -75,9 +71,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(params[:event])
     if @event.save
-      redirect_to :action => "index"
-    else
-      render :action => "new"
+      redirect_to :action => "simile"
     end
   end
 
