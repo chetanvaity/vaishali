@@ -1,16 +1,44 @@
 <div id="timeline-with-buttons">
+
     <div id="buttons">
-      <a href="/events/new/"><div id="new-event-button"></div></a>
+      <div id="new-event-button"></div>
       <div id="button-terminator"></div>
       <div class="clear"></div>
     </div>
     
+ 
+    <div id="bgPopup"></div>
+    <div id="popup">
+      <a id="popupClose">x</a>  
+      New Event
+    </div>
+
     <div id="my-timeline"></div>
+
     <noscript>
     This page uses Javascript to show you a Timeline. Please enable Javascript in your browser to see the full page. Thank you.
     </noscript>
 </div>
-   
+
+    <script type="text/javascript">
+      function show_popup() {
+        $('#bgPopup').fadeIn('fast');
+        $('#popup').fadeIn('fast');
+      }
+      function close_popup() {
+        $('#bgPopup').fadeOut('fast');
+        $('#popup').fadeOut('fast');
+      }
+      $(document).ready(function(){  
+        $("#new-event-button").click(function() {
+          show_popup();
+        });
+        $("#popupClose").click(function(){
+          close_popup();
+        });
+      });
+    </script>
+
     <script>
       var tl;
       function onLoad() {
@@ -27,18 +55,18 @@
         var bandInfos = [
           Timeline.createBandInfo({
              eventSource:    eventSource,
-             date:           "Jan 01 1990 00:00:00 GMT",
+             date:           "<%= @anchorDate %>",
              width:          "85%", 
-             intervalUnit:   Timeline.DateTime.YEAR, 
+             intervalUnit:   Timeline.DateTime.<%= @intervalUnit1 %>,
              intervalPixels: 50,
              theme:          theme,
              backgroundColor: "#D8CAA8"
              }),
           Timeline.createBandInfo({
-             date:           "Jan 01 1990 00:00:00 GMT",
+             date:           "<%= @anchorDate %>",
              eventSource:    eventSource,
              width:          "15%", 
-             intervalUnit:   Timeline.DateTime.DECADE, 
+             intervalUnit:   Timeline.DateTime.<%= @intervalUnit2 %>,
              intervalPixels: 100,
              theme:          theme,
              layout:         'overview'

@@ -15,9 +15,6 @@ body {
   padding: 10px;
 }
 
-#header {
-}
-
 #rect1 {
   background: transparent url(/images/rect-green.png);
   height: 30px;
@@ -46,4 +43,51 @@ body {
   border: 1px solid #EAEDE1;
   margin: 10px 1px;
   padding: 30px 10px;
+}
+
+#new-event-button {
+  cursor: pointer;
+}
+
+
+
+#bgPopup {
+  display:none;  
+  position:fixed;  
+  _position:absolute; /* hack for internet explorer 6*/  
+  height:100%;  
+  width:100%;  
+  top:0;  
+  left:0;  
+  background:#000000;  
+  border:1px solid #cecece;  
+  z-index:200;  
+  -moz-opacity:0.90;
+  -khtml-opacity: 0.90;
+  opacity: 0.90;
+  filter:alpha(opacity=90);
+}
+
+#popup {
+  display:none;  
+  position:fixed;  
+  _position:absolute; /* hack for internet explorer 6*/  
+  left:400px;
+  top:100px;
+  height:384px;  
+  width:408px;  
+  background:#FFFFFF;  
+  border:2px solid #183604;  
+  z-index:201;  
+  padding:12px;  
+}
+
+#popupClose {
+  line-height:14px;  
+  right:6px;  
+  top:4px;  
+  position:absolute;  
+  color:#6fa5fd;  
+  display:block;  
+  cursor: pointer;
 }

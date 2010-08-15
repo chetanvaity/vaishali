@@ -9,6 +9,7 @@ class EventsController < ApplicationController
 
   def simile
     @events = Event.find(:all, :order => "start")
+    
     f = File.new("public/simile.gen.xml", "w")
     xml = Builder::XmlMarkup.new(:target => f, :indent => 1)
     xml.data do
@@ -26,11 +27,37 @@ class EventsController < ApplicationController
                      :title => event.name, 
                      :isDuration => "true")
         end
-        
       }
     end
     f.close
+
+    @anchorDate, @intervalUnit1, @intervalUnit2 = simile_params(@events)
     render :layout => "simile"
+  end
+
+  def simile_params(events)
+    # anchor date, interval units, interval pixels
+    min_date = Event.minimum('start')
+    max_date = Event.maximum('start')
+    max_end = Event.maximum('end')
+    if max_end && max_end > max_date
+      max_date = max_end
+    end
+
+    anchorDate = min_date
+    days_range = (max_date - min_date)/(24*60*60)
+    if days_range > 36500
+      intervalUnit1 = "DECADE"
+      intervalUnit2 = "CENTURY"
+    elsif days_range > 365
+      intervalUnit1 = "YEAR"
+      intervalUnit2 = "DECADE"
+    else
+      intervalUnit1 = "DAY"
+      intervalUnit2 = "YEAR"
+    end
+
+    return anchorDate, intervalUnit1, intervalUnit2
   end
 
   def show
