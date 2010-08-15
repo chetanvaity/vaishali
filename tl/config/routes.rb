@@ -40,8 +40,7 @@ ActionController::Routing::Routes.draw do |map|
   # consider removing or commenting them out if you're using named routes and resources.
 
   map.resources :events
-  map.connect 'tl', :controller => 'events', :action => 'tl'
-  map.connect 'simile', :controller => 'events', :action => 'simile'
+  map.connect 'tl', :controller => 'events', :action => 'simile'
 
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
