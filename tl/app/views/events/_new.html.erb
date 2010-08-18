@@ -1,22 +1,21 @@
+<div class="popupform">
 <h1>New Event</h1>
+<p>Enter details of the event</p>
 
 <% @event = Event.new %>
 <% form_for(@event) do |f| %>
   <%= f.error_messages %>
 
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :start %><br />
+    <%= f.label :name, "Title <span class='small'>Short title for event</span>" %>
+    <%= f.text_field :name  %>
+
+    <%= f.label :start, "Start <span class='small'>(MM/DD/YYYY)</span>" %>
     <%= f.text_field :start %>
-  </p>
-  <p>
-    <%= f.submit "Create" %>
-  </p>
+    
+    <div align="center">
+    <%= f.submit "Add", :class => "popupform_button" %>
+    </div>
 <% end %>
 
-<br/>
-
-
+<div class="spacer"></div>
+</div>
