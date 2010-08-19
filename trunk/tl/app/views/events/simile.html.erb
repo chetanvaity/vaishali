@@ -1,11 +1,4 @@
 <div id="timeline-with-buttons">
-
-    <div id="buttons">
-      <div id="new-event-button"></div>
-      <div id="button-terminator"></div>
-      <div class="clear"></div>
-    </div>
-    
  
     <div id="bgPopup"></div>
     <div id="popup">
@@ -13,7 +6,18 @@
       <%= render :partial => "new" %> 
     </div>
 
-    <div id="my-timeline"></div>
+    <table style="border-spacing:0px 0px;"}><tr>
+	<td>
+	  <div id="my-timeline"></div>
+	</td>
+	<td>
+	  <div id="buttons">
+	    <div id="new-event-button"></div>
+	    <div id="button-terminator"></div>
+	    <div class="clear"></div>
+	  </div>
+	</td>
+    </tr></table>
 
     <noscript>
     This page uses Javascript to show you a Timeline. Please enable Javascript in your browser to see the full page. Thank you.
