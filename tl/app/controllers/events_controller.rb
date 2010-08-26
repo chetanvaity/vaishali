@@ -12,16 +12,18 @@ class EventsController < ApplicationController
       @events && @events.each { |event|
         if event.end.nil?
           # point events
-          xml.event(event.description || "", 
-                     :start => event.start.strftime("%b %d %Y %H:%M:%S"), 
-                     :title => event.name)
+          xml.event((event.description || "") +
+             "<div class='edit-event' id='edit-event-#{event.id}'>[Edit]</div>",
+             :start => event.start.strftime("%b %d %Y %H:%M:%S"), 
+             :title => event.name)
         else
           # range events
-          xml.event(event.description || "", 
-                     :start => event.start.strftime("%b %d %Y %H:%M:%S"), 
-                     :end => event.end.strftime("%b %d %Y %H:%M:%S"), 
-                     :title => event.name, 
-                     :isDuration => "true")
+          xml.event((event.description || "") +
+             "<div class='edit-event' id='edit-event-#{event.id}'>[Edit]</div>",
+             :start => event.start.strftime("%b %d %Y %H:%M:%S"), 
+             :end => event.end.strftime("%b %d %Y %H:%M:%S"), 
+             :title => event.name, 
+             :isDuration => "true")
         end
       }
     end
@@ -78,9 +80,7 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
     if @event.update_attributes(params[:event])
-      redirect_to :action => "index"
-    else
-      render :action => "edit"
+      redirect_to :action => "simile"
     end
   end
 

@@ -111,6 +111,13 @@
     float: left;
     /*margin: 0px;*/
     background: url(/images/new-button.png) no-repeat;
+    cursor: pointer;
+}
+
+div.edit-event {
+    float: right;
+    cursor: pointer;
+    color: #998000;
 }
 
 #button-terminator {

@@ -45,13 +45,8 @@ body {
   padding: 30px 10px;
 }
 
-#new-event-button {
-  cursor: pointer;
-}
-
-
 /* Popup Divs */
-#bgPopup {
+.bgPopup {
   display:none;  
   position:fixed;  
   _position:absolute; /* hack for internet explorer 6*/  
@@ -68,7 +63,7 @@ body {
   filter:alpha(opacity=70);
 }
 
-#popup {
+.popup {
   display:none;  
   position:fixed;  
   _position:absolute; /* hack for internet explorer 6*/  
@@ -80,7 +75,7 @@ body {
   padding:12px;  
 }
 
-#popupClose {
+.popupClose {
   line-height:14px;  
   right:6px;  
   top:4px;  

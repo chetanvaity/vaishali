@@ -1,9 +1,15 @@
 <div id="timeline-with-buttons">
  
-    <div id="bgPopup"></div>
-    <div id="popup">
-      <a id="popupClose">x</a>  
+    <div id="newBgPopup" class="bgPopup"></div>
+    <div id="newPopup" class="popup">
+      <a id="newPopupClose" class="popupClose">x</a>  
       <%= render :partial => "new" %> 
+    </div>
+
+    <div id="editBgPopup" class="bgPopup"></div>
+    <div id="editPopup" class="popup">
+      <a id="editPopupClose" class="popupClose">x</a>  
+      <%= render :partial => "edit" %> 
     </div>
 
     <table style="border-spacing:0px 0px;"}><tr>
@@ -25,20 +31,32 @@
 </div>
 
     <script type="text/javascript">
-      function show_popup() {
-        $('#bgPopup').fadeIn('fast');
-        $('#popup').fadeIn('fast');
+      function show_popup(name) {
+        $('#'+name+'BgPopup').fadeIn('fast');
+        $('#'+name+'Popup').fadeIn('fast');
       }
-      function close_popup() {
-        $('#bgPopup').fadeOut('fast');
-        $('#popup').fadeOut('fast');
+      function close_popup(name) {
+        $('#'+name+'BgPopup').fadeOut('fast');
+        $('#'+name+'Popup').fadeOut('fast');
       }
+
       $(document).ready(function(){  
         $("#new-event-button").click(function() {
-          show_popup();
+          show_popup("new");
         });
-        $("#popupClose").click(function(){
-          close_popup();
+        $("#newPopupClose").click(function(){
+          close_popup("new");
+        });
+        /* bind click for any edit event elements added now or in future */
+        $(".edit-event").live('click', function() { 
+          event_id = this.id.match(/edit-event-(\d+)/)[1];
+          /*jQuery.ajax(
+            async: false,
+          );*/
+          show_popup("edit");
+        });
+        $("#editPopupClose").click(function(){
+          close_popup("edit");
         });
       });
     </script>

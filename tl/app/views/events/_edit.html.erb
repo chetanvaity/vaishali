@@ -1,9 +1,8 @@
 <div class="popupform">
-<h1>New Event</h1>
-<p>Enter details of the event</p>
+<h1>Edit Event</h1>
+<p>Edit details of the event</p>
 
-<% @event = Event.new %>
-<% form_for(@event) do |f| %>
+<% form_for :event, :url => { :action => "update" } do |f| %>
   <%= f.error_messages %>
 
     <%= f.label :name, "Title <span class='small'>Short title for event</span>" %>
@@ -19,7 +18,7 @@
     <%= f.text_field :description %>
     
     <div align="center">
-    <%= f.submit "Add", :class => "popupform_button" %>
+    <%= f.submit "Update", :class => "popupform_button" %>
     </div>
 <% end %>
 
