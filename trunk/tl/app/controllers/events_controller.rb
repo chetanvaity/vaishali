@@ -68,8 +68,9 @@ class EventsController < ApplicationController
 
   def edit
     @event = Event.find(params[:id])
+    render :json => @event.to_json
   end
-
+  
   def create
     @event = Event.new(params[:event])
     if @event.save
