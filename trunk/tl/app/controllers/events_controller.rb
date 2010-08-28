@@ -66,7 +66,7 @@ class EventsController < ApplicationController
     render :layout => "simile"
   end
 
-  def edit
+  def get
     @event = Event.find(params[:id])
     render :json => @event.to_json
   end
@@ -79,7 +79,7 @@ class EventsController < ApplicationController
   end
 
   def update
-    @event = Event.find(params[:id])
+    @event = Event.find(params[:event][:id])
     if @event.update_attributes(params[:event])
       redirect_to :action => "simile"
     end

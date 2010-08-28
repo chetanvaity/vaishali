@@ -5,6 +5,8 @@
 <% form_for :event, :url => { :action => "update" }, :html => { :id => "edit_event_form" }  do |f| %>
   <%= f.error_messages %>
 
+    <%= f.hidden_field :id %>
+
     <%= f.label :name, "Title <span class='small'>Short title for event</span>" %>
     <%= f.text_field :name  %>
 
