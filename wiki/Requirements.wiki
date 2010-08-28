@@ -1,5 +1,5 @@
 #summary Requirements
-#labels Phase-Requirements
+#labels Phase-Requirements,Featured
 
 = Stage 1 =
 
