@@ -47,24 +47,21 @@
         $("#newPopupClose").click(function(){
           close_popup("new");
         });
+
         /* bind click for any edit event elements added now or in future */
         $(".edit-event").live('click', function() { 
           event_id = this.id.match(/edit-event-(\d+)/)[1];
           jQuery.ajax( {
             async: false,
-            url: "/events/edit/" + event_id,
+            url: "/events/get/" + event_id,
             success: function(data) {
+              $("#edit_event_form > #event_id").val(data["event"]["id"]);
               $("#edit_event_form > #event_name").val(data["event"]["name"]);
-              var start = Date.parse(data["event"]["start"]);
-              alert(start);
-              $("#edit_event_form > #event_start").val(start);
-              if (data["event"]["end"] != null)
-              {
-                var end = new Date(data["event"]["end"]);
+              $("#edit_event_form > #event_start").val(data["event"]["start"]);
+              if (data["event"]["end"] != null) {
                 $("#edit_event_form > #event_end").val(data["event"]["end"]);
               }
-              if (data["event"]["description"] != null)
-              {
+              if (data["event"]["description"] != null) {
                 $("#edit_event_form > #event_description").val(data["event"]["description"]);
               }
             }
