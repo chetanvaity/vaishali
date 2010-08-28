@@ -4,25 +4,26 @@
 = Stage 1 =
 
     * Very nice looking timeline
-      * The event point - icon, hover effect, title display, description on hover
-      * Event placement - avoid overlap of events, vertical placement (gap) of events
-      * Vertical time bars - decide on good time units
-      * Rectangular boundary of timeline box (or not)
+      * ~~The event point - icon, hover effect, title display, description on hover~~
+      * ~~Event placement - avoid overlap of events, vertical placement (gap) of events~~
+      * ~~Vertical time bars - decide on good time units~~
+      * ~~Rectangular boundary of timeline box (or not)~~
       * Overall look
     * Left and right movement of timeline
     * Zoom in/out
     * Simile
-      * Change lineColor for instant events, it doesn’t change from blue
-      * Change color of labels
+      * ~~Change lineColor for instant events, it doesn’t change from blue~~
+      * ~~Change color of labels~~
       * make tapes broad with labels on top of the tapes
       * Get border for tapes so that continuous events can be distinguished
       * rounded effect for tape with green gradient (using image repeat..?)
       * try image in bubble
       * Better date format in description
-      * Remove [Discuss]
+      * ~~Remove "Discuss"~~
     * Web app integration
-      * Generate XML dynamically using web app
-      * Simple CRUD pages for events
+      * ~~Generate XML dynamically using web app~~
+      * ~~Simple CRUD pages for events~~
+      * Multiple users simultaneously
     * Functionality
       * Move left and right
       * Zoom
