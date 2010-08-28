@@ -1,0 +1,13 @@
+#summary What's the best way of getting historical dates from the user
+#labels Featured
+
+  * 15 Aug 1947
+  * 15 August 1947
+  * Aug 15 1947
+  * 1857
+  * December 1755
+  * 1005 AD
+  * 1005 A.D.
+  * 232 BC
+  * 232 B.C.
+  
