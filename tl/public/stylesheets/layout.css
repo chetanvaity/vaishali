@@ -131,17 +131,17 @@ border:solid 1px #284907;
 width:200px;
 margin:2px 0 20px 10px;
 }
-.popupform input[type="submit"]{
-clear:both;
-margin:0 auto;
-width:125px;
-height:31px;
-background:#666666 url(img/button.png) no-repeat;
-text-align:center;
-line-height:31px;
-color:#FFFFFF;
-font-size:11px;
-font-weight:bold;
+.popupform input[type="submit"], .popupform input[type="button"] {
+    clear:both;
+    margin:0 auto;
+    width:125px;
+    height:31px;
+    background:#666666 url(img/button.png) no-repeat;
+    text-align:center;
+    line-height:31px;
+    color:#FFFFFF;
+    font-size:11px;
+    font-weight:bold;
 }
 
 .spacer {

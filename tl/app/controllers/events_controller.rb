@@ -13,13 +13,15 @@ class EventsController < ApplicationController
         if event.end.nil?
           # point events
           xml.event((event.description || "") +
-             "<div class='edit-event' id='edit-event-#{event.id}'>[Edit]</div>",
+             "<div class='delete-event' id='delete-event-#{event.id}'>[Delete]</div>
+             <div class='edit-event' id='edit-event-#{event.id}'>[Edit]</div>",
              :start => event.start.strftime("%b %d %Y %H:%M:%S"), 
              :title => event.name)
         else
           # range events
           xml.event((event.description || "") +
-             "<div class='edit-event' id='edit-event-#{event.id}'>[Edit]</div>",
+             "<div class='delete-event' id='delete-event-#{event.id}'>[Delete]</div>
+             <div class='edit-event' id='edit-event-#{event.id}'>[Edit]</div>",
              :start => event.start.strftime("%b %d %Y %H:%M:%S"), 
              :end => event.end.strftime("%b %d %Y %H:%M:%S"), 
              :title => event.name, 
@@ -86,10 +88,10 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event = Event.find(params[:id])
+    @event = Event.find(params[:event][:id])
     @event.destroy
     
-    redirect_to :action => "index"
+    redirect_to :action => "simile"
   end
 
 end
