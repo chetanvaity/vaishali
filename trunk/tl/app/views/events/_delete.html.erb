@@ -1,0 +1,16 @@
+<div class="popupform">
+<h1>Do you really want to delete this event?</h1>
+
+<% form_for :event, :url => { :action => "destroy" }, :html => { :id => "delete_event_form" }  do |f| %>
+  <%= f.error_messages %>
+
+    <%= f.hidden_field :id %>
+    
+    <div align="center">
+    <input id="event_delete_cancel" type="button" class="popupform_button" value="No">
+    <%= f.submit "Yes, Delete!", :class => "popupform_button" %>
+    </div>
+<% end %>
+
+<div class="spacer"></div>
+</div>

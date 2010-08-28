@@ -12,6 +12,12 @@
       <%= render :partial => "edit" %> 
     </div>
 
+    <div id="deleteBgPopup" class="bgPopup"></div>
+    <div id="deletePopup" class="popup">
+      <a id="deletePopupClose" class="popupClose">x</a>  
+      <%= render :partial => "delete" %> 
+    </div>
+
     <table style="border-spacing:0px 0px;"}><tr>
 	<td>
 	  <div id="my-timeline"></div>
@@ -44,7 +50,8 @@
         $("#new-event-button").click(function() {
           show_popup("new");
         });
-        $("#newPopupClose").click(function(){
+
+        $("#newPopupClose").click(function() {
           close_popup("new");
         });
 
@@ -55,25 +62,41 @@
             async: false,
             url: "/events/get/" + event_id,
             success: function(data) {
-              $("#edit_event_form > #event_id").val(data["event"]["id"]);
-              $("#edit_event_form > #event_name").val(data["event"]["name"]);
-              $("#edit_event_form > #event_start").val(data["event"]["start"]);
+              $("#edit_event_form #event_id").val(data["event"]["id"]);
+              $("#edit_event_form #event_name").val(data["event"]["name"]);
+              $("#edit_event_form #event_start").val(data["event"]["start"]);
               if (data["event"]["end"] != null) {
-                $("#edit_event_form > #event_end").val(data["event"]["end"]);
+                $("#edit_event_form #event_end").val(data["event"]["end"]);
               }
               if (data["event"]["description"] != null) {
-                $("#edit_event_form > #event_description").val(data["event"]["description"]);
+                $("#edit_event_form #event_description").val(data["event"]["description"]);
               }
             }
           } );
           show_popup("edit");
         });
-        $("#editPopupClose").click(function(){
+
+        $("#editPopupClose").click(function() {
           close_popup("edit");
         });
+
+        $(".delete-event").live('click', function() {
+          event_id = this.id.match(/delete-event-(\d+)/)[1];
+          $("#delete_event_form #event_id").val(event_id);
+          show_popup("delete");
+         });
+
+        $("#deletePopupClose").click(function() {
+          close_popup("delete");
+        });
+
+        $("#delete_event_form #event_delete_cancel").click(function() {
+          close_popup("delete");
+        });
+
       });
     </script>
-
+    
     <script>
       var tl;
       function onLoad() {

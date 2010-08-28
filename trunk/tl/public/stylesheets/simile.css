@@ -121,6 +121,12 @@ div.edit-event {
     color: #998000;
 }
 
+div.delete-event {
+    float: right;
+    cursor: pointer;
+    color: #998000;
+}
+
 #button-terminator {
     /*position: relative;*/
     /*float: left;*/
