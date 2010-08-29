@@ -1,6 +1,8 @@
 #summary What's the best way of getting historical dates from the user
 #labels Featured
 
+  * 15/08/1947
+  * 15-08-1947
   * 15 Aug 1947
   * 15 August 1947
   * Aug 15 1947
