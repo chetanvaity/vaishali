@@ -11,10 +11,10 @@
     <%= f.text_field :name  %>
 
     <%= f.label :start, "Start <span class='small'>(MM/DD/YYYY)</span>" %>
-    <%= f.text_field :start %>
+    <%= f.text_field :start, :class => "historicaldate" %>
 
     <%= f.label :end, "End <span class='small'>(MM/DD/YYYY)</span>" %>
-    <%= f.text_field :end %>
+    <%= f.text_field :end, :class => "historicaldate" %>
 
     <%= f.label :description, "Description <span class='small'>Details of event</span>" %>
     <%= f.text_field :description %>

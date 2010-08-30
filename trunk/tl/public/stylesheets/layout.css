@@ -148,3 +148,16 @@ margin:2px 0 20px 10px;
 clear:both;
 height:1px;
 }
+
+/*------- Tooltips --------------*/
+.tooltip {
+    display:none;
+    background:transparent url(/images/tooltip/white.png);
+    font-size:12px;
+    height:70px;
+    width:160px;
+    padding:25px;
+    color:#284907;
+    z-index:3000;
+}
+
