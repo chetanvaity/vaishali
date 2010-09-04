@@ -1,3 +1,5 @@
+require 'builder'
+
 class EventsController < ApplicationController
   def index
     @events = Event.find(:all, :order => "start")
@@ -105,8 +107,12 @@ class EventsController < ApplicationController
   end
   
   def create
+    # Verify params
+    
     @event = Event.new(params[:event])
     if @event.save
+      redirect_to :action => "simile"
+    else
       redirect_to :action => "simile"
     end
   end

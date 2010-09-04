@@ -3,7 +3,6 @@
 <p>Edit details of the event</p>
 
 <% form_for :event, :url => { :action => "update" }, :html => { :id => "edit_event_form" }  do |f| %>
-  <%= f.error_messages %>
 
     <%= f.hidden_field :id %>
 
