@@ -1,14 +1,2 @@
 Use this README file to introduce your application and point to useful places in the API for learning more.
 Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
-
-Things to do:
-  * Text should not overflow the event divs (WORKAROUND - coloured div area made small)
-  * Divs at the same time should overlap or come one below the other (HACKED - cycle 3 divs vertically)
-  * Time scale should be visible - with vertical lines
-  * Range events
-  * Move timeline left and right
-  * Zoom
-  * 
-
-Doubts:
-  * Why don't spans or divs get positioned corrcetly with left and bottom. They do get positioned with left and top.

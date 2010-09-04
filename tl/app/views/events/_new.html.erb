@@ -4,7 +4,6 @@
 
 <% @event = Event.new %>
 <% form_for(@event) do |f| %>
-  <%= f.error_messages %>
 
     <%= f.label :name, "Title <span class='small'>Short title for event</span>" %>
     <%= f.text_field :name  %>
