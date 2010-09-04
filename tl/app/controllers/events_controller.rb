@@ -4,8 +4,8 @@ class EventsController < ApplicationController
   end
 
   def simile 
-    @events = Event.find(:all, :order => "start")
-    
+    @events, min_date, max_date = get_events(params[:move], 10) 
+
     f = File.new("public/simile.gen.xml", "w")
     xml = Builder::XmlMarkup.new(:target => f, :indent => 1)
     xml.data do
@@ -31,18 +31,45 @@ class EventsController < ApplicationController
     end
     f.close
 
-    @anchorDate, @intervalUnit1, @intervalUnit2 = simile_params(@events)
+    simile_params(@events, min_date, max_date)
     render :layout => "simile"
   end
 
-  def simile_params(events)
-    # anchor date, interval units, interval pixels
-    min_date = Event.minimum('start')
-    max_date = Event.maximum('start')
-    max_end = Event.maximum('end')
-    if max_end && max_end > max_date
-      max_date = max_end
+  def get_events(move, zoomfactor)
+    events = nil
+    min_date = nil
+    max_date = nil
+    if session[:max_date] && session[:min_date]
+      range = session[:max_date] - session[:min_date]
+      range = 365*24*60*60 if range == 0 # 1 year if 0
+      case move
+      when "in"
+        range_diff = (range - range/zoomfactor)/2
+        min_date = session[:min_date] + range_diff
+        max_date = session[:max_date] - range_diff
+      when "out"
+        range_diff = (range*zoomfactor - range)/2
+        min_date = session[:min_date] - range_diff
+        max_date = session[:max_date] + range_diff
+      when "left"
+        max_date = session[:min_date]
+        min_date = session[:min_date] - range
+      when "right"
+        min_date = session[:max_date]
+        max_date = session[:max_date] + range
+      end
     end
+    p ">>>>>> min date", min_date
+    p ">>>>>> max date", max_date
+    events = Event.get(min_date, max_date)
+    return events, min_date, max_date
+  end
+
+  def simile_params(events, min_date, max_date)
+    # anchor date, interval units, interval pixels
+    n = events.size
+    min_date = min_date || events[0][:start]
+    max_date = max_date || events[n-1][:end] || events[n-1][:start]
 
     anchorDate = min_date
     days_range = (max_date - min_date)/(24*60*60)
@@ -57,7 +84,11 @@ class EventsController < ApplicationController
       intervalUnit2 = "YEAR"
     end
 
-    return anchorDate, intervalUnit1, intervalUnit2
+    session[:anchor_date] = anchorDate
+    session[:interval_unit1] = intervalUnit1
+    session[:interval_unit2] = intervalUnit2
+    session[:min_date] = min_date
+    session[:max_date] = max_date
   end
 
   def show

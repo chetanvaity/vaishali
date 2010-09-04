@@ -116,18 +116,18 @@
         var bandInfos = [
           Timeline.createBandInfo({
              eventSource:    eventSource,
-             date:           "<%= @anchorDate %>",
+             date:           "<%= session[:anchor_date] %>",
              width:          "85%", 
-             intervalUnit:   Timeline.DateTime.<%= @intervalUnit1 %>,
+             intervalUnit:   Timeline.DateTime.<%= session[:interval_unit1] %>,
              intervalPixels: 50,
              theme:          theme,
              backgroundColor: "#D8CAA8"
              }),
           Timeline.createBandInfo({
-             date:           "<%= @anchorDate %>",
+             date:           "<%= session[:anchor_date] %>",
              eventSource:    eventSource,
              width:          "15%", 
-             intervalUnit:   Timeline.DateTime.<%= @intervalUnit2 %>,
+             intervalUnit:   Timeline.DateTime.<%= session[:interval_unit2] %>,
              intervalPixels: 100,
              theme:          theme,
              layout:         'overview'
