@@ -1,0 +1,5 @@
+/* Insert a notice */
+$("#create_notice").html('<div class="flash notice"><%= escape_javascript(flash.delete(:notice)) %></div>');
+ 
+/* Reset the comment form */
+$("#new_event")[0].reset();
