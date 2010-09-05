@@ -2,21 +2,29 @@
 <h1>Edit Event</h1>
 <p>Edit details of the event</p>
 
-<% form_for :event, :url => { :action => "update" }, :html => { :id => "edit_event_form" }  do |f| %>
+<div id="update_notice"></div>
+
+<% form_for :event, :remote => true, :url => { :action => "update" }, :html => { :id => "edit_event_form" }  do |f| %>
 
     <%= f.hidden_field :id %>
-
-    <%= f.label :name, "Title <span class='small'>Short title for event</span>" %>
-    <%= f.text_field :name  %>
-
-    <%= f.label :start, "Start <span class='small'>(MM/DD/YYYY)</span>" %>
-    <%= f.text_field :start, :class => "historicaldate" %>
-
-    <%= f.label :end, "End <span class='small'>(MM/DD/YYYY)</span>" %>
-    <%= f.text_field :end, :class => "historicaldate" %>
-
-    <%= f.label :description, "Description <span class='small'>Details of event</span>" %>
-    <%= f.text_field :description %>
+<table>
+  <tr>
+    <td><%= f.label :name, "Title" %><span class='small'>Short title for event</span></td>
+    <td><%= f.text_field :name  %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :start, "Start" %><span class='small'>(MM/DD/YYYY)</span></td>
+    <td><%= f.text_field :start, :class => "historicaldate" %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :end, "End" %><span class='small'>(MM/DD/YYYY)</span></td>
+    <td><%= f.text_field :end, :class => "historicaldate" %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :description, "Description" %><span class='small'>Details of event</span></td>
+    <td><%= f.text_field :description %></td>
+  </tr>
+</table>
     
     <div align="center">
     <%= f.submit "Update", :class => "popupform_button" %>

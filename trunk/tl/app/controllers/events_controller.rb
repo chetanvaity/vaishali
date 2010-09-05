@@ -107,20 +107,26 @@ class EventsController < ApplicationController
   end
   
   def create
-    # Verify params
+    # TBD: Verify params
     
     @event = Event.new(params[:event])
+    flash[:notice] = "Event created successfully!"
     if @event.save
-      redirect_to :action => "simile"
-    else
-      redirect_to :action => "simile"
+      respond_to do |format|
+        format.html { redirect_to :action => "simile" }
+        format.js
+      end
     end
   end
 
   def update
     @event = Event.find(params[:event][:id])
+    flash[:notice] = "Event updated successfully!"
     if @event.update_attributes(params[:event])
-      redirect_to :action => "simile"
+      respond_to do |format|
+        format.html { redirect_to :action => "simile" }
+        format.js
+      end
     end
   end
 
