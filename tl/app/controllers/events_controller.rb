@@ -51,7 +51,7 @@ class EventsController < ApplicationController
     # get new date range
     abs_min_date = Event.minimum("start")
     abs_max_date = [Event.maximum("start"), Event.maximum("end")].max
-    if session[:max_date] && session[:min_date]
+    if session[:max_date] && session[:min_date] && move
       min_date = session[:min_date]
       max_date = session[:max_date]
       range = session[:max_date] - session[:min_date]
