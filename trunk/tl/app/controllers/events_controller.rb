@@ -1,13 +1,16 @@
 require 'builder'
 
 class EventsController < ApplicationController
+
   def index
     @events = Event.find(:all, :order => "start")
   end
 
   def simile 
-    @events, min_date, max_date = get_events(params[:move], 10) 
+    # retrieve events to display
+    @events = get_events(params[:move])
 
+    # generate xml file for events
     f = File.new("public/simile.gen.xml", "w")
     xml = Builder::XmlMarkup.new(:target => f, :indent => 1)
     xml.data do
@@ -33,64 +36,82 @@ class EventsController < ApplicationController
     end
     f.close
 
-    simile_params(@events, min_date, max_date)
+    # render timeline
     render :layout => "simile"
   end
 
-  def get_events(move, zoomfactor)
+  def get_events(move)
     events = nil
-    min_date = nil
-    max_date = nil
+    intervalUnit1 = nil
+    multiple1 = nil
+    intervalUnit2 = nil
+    multiple2 = nil
+    anchorDate = nil
+
+    # get new date range
+    abs_min_date = Event.minimum("start")
+    abs_max_date = [Event.maximum("start"), Event.maximum("end")].max
     if session[:max_date] && session[:min_date]
+      min_date = session[:min_date]
+      max_date = session[:max_date]
       range = session[:max_date] - session[:min_date]
-      range = 365*24*60*60 if range == 0 # 1 year if 0
+      range = 24*60*60 if range == 0 # 1 day if 0
       case move
       when "in"
-        range_diff = (range - range/zoomfactor)/2
-        min_date = session[:min_date] + range_diff
-        max_date = session[:max_date] - range_diff
+        if range > 24*60*60
+          new_daysrange, intervalUnit1, multiple1 = SimileInterval.get_smaller_interval(
+                      session[:interval_unit1], session[:multiple1])
+          range_diff = (range - (new_daysrange*24*60*60))/2
+          min_date = session[:min_date] + range_diff
+          max_date = session[:max_date] - range_diff
+        end
       when "out"
-        range_diff = (range*zoomfactor - range)/2
-        min_date = session[:min_date] - range_diff
-        max_date = session[:max_date] + range_diff
+        if session[:min_date] > abs_min_date || session[:max_date] < abs_max_date
+          new_daysrange, intervalUnit1, multiple1 = SimileInterval.get_larger_interval(
+                      session[:interval_unit1], session[:multiple1])
+          range_diff = (new_daysrange*24*60*60 - range)/2
+          min_date = session[:min_date] - range_diff
+          max_date = session[:max_date] + range_diff
+        end
       when "left"
-        max_date = session[:min_date]
-        min_date = session[:min_date] - range
+        if session[:min_date] > abs_min_date 
+          max_date = session[:max_date] - range/2
+          min_date = session[:min_date] - range/2
+        end
       when "right"
-        min_date = session[:max_date]
-        max_date = session[:max_date] + range
+        if session[:max_date] < abs_max_date
+          min_date = session[:min_date] + range/2
+          max_date = session[:max_date] + range/2
+        end
       end
-    end
-    p ">>>>>> min date", min_date
-    p ">>>>>> max date", max_date
-    events = Event.get(min_date, max_date)
-    return events, min_date, max_date
-  end
-
-  def simile_params(events, min_date, max_date)
-    # anchor date, interval units, interval pixels
-    n = events.size
-    min_date = min_date || events[0][:start]
-    max_date = max_date || events[n-1][:end] || events[n-1][:start]
-
-    anchorDate = min_date
-    days_range = (max_date - min_date)/(24*60*60)
-    if days_range > 36500
-      intervalUnit1 = "DECADE"
-      intervalUnit2 = "CENTURY"
-    elsif days_range > 365
-      intervalUnit1 = "YEAR"
-      intervalUnit2 = "DECADE"
     else
-      intervalUnit1 = "DAY"
-      intervalUnit2 = "YEAR"
+      min_date = abs_min_date
+      max_date = abs_max_date
     end
 
-    session[:anchor_date] = anchorDate
-    session[:interval_unit1] = intervalUnit1
-    session[:interval_unit2] = intervalUnit2
+    # get events for the date range
+    events = Event.get(min_date, max_date)
+
+    # set anchor date as the mid-point of date range
+    anchorDate = min_date + (max_date - min_date)/2
+
+    # set interval units for the date range
+    if intervalUnit1.nil?
+      days_range = (max_date - min_date)/(24*60*60)
+      intervalUnit1, multiple1 = SimileInterval.map_range_to_interval(days_range)
+    end
+    intervalUnit2, multiple2 = intervalUnit1, multiple1*5
+
+    # store in session
     session[:min_date] = min_date
     session[:max_date] = max_date
+    session[:anchor_date] = anchorDate
+    session[:interval_unit1] = intervalUnit1
+    session[:multiple1] = multiple1
+    session[:interval_unit2] = intervalUnit2
+    session[:multiple2] = multiple2
+
+    return events
   end
 
   def show

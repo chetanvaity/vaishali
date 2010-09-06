@@ -103,6 +103,7 @@
     <script>
       var tl;
       function onLoad() {
+        // create the simile timeline
         var eventSource = new Timeline.DefaultEventSource();
         var theme = Timeline.ClassicTheme.create(); // create the theme
         theme.event.track.gap = 8;
@@ -119,16 +120,18 @@
              date:           "<%= session[:anchor_date] %>",
              width:          "85%", 
              intervalUnit:   Timeline.DateTime.<%= session[:interval_unit1] %>,
-             intervalPixels: 50,
+             multiple:       <%= session[:multiple1] %>,
+             intervalPixels: 50/<%= session[:multiple1] %>,
              theme:          theme,
              backgroundColor: "#D8CAA8"
              }),
           Timeline.createBandInfo({
-             date:           "<%= session[:anchor_date] %>",
              eventSource:    eventSource,
+             date:           "<%= session[:anchor_date] %>",
              width:          "15%", 
              intervalUnit:   Timeline.DateTime.<%= session[:interval_unit2] %>,
-             intervalPixels: 100,
+             multiple:       <%= session[:multiple2] %>,
+             intervalPixels: 100/<%= session[:multiple2] %>,
              theme:          theme,
              layout:         'overview'
              })
@@ -138,6 +141,13 @@
 
         tl = Timeline.create(document.getElementById("my-timeline"), bandInfos);
         Timeline.loadXML("simile.gen.xml", function(xml, url) { eventSource.loadXML(xml, url); });
+
+        // disable draggability by overriding _onMouseDown function removing 
+        // any dragging related functionality
+        Timeline._Band.prototype._onMouseDown=function(B,A,C){
+          this.closeBubble();
+          this._dragging = false;
+        };
       }
 
       var resizeTimerID = null;
