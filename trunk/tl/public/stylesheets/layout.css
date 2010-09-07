@@ -1,5 +1,4 @@
 body {
-  background-color: #EAEDE1;
   color: #000000;
   font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
   font-size: 14px;
@@ -9,39 +8,39 @@ body {
 
 #centerbox {
   margin: auto;
-  width: 974px;
-  background: #FFFFFF;
-  border: 1px solid #EAEDE1;
-  padding: 10px;
 }
 
 #rect1 {
-  background: transparent url(/images/rect-green.png);
-  height: 30px;
-  width: 954px;
-  border: 1px solid #EAEDE1;
-  margin: 10px 1px 1px 1px;
-  padding: 10px;
-  font-size: 180%;
-  color: #FFFFFF;
-  text-align: left;
+  height: 100px;
+  width: 800px;
 }
-#rect2 {
-  background: transparent url(/images/rect-grey.png);
+#rect11 {
   height: 30px;
-  width: 954px;
-  border: 1px solid #EAEDE1;
-  margin: 1px;
-  padding: 10px;
-  font-size: 180%;
-  color: #FFFFFF;
+  width: 200px;
+  border: 1px solid black;
+  float: right;
+}
+#rect12 {
+  height: 70px;
+  width: 800px;
+}
+#rect13 {
+  height: 30px;
+  border: 1px solid black;
+  width: 400px;
+  float: right;
+}
+
+#rect2 {
+  background: transparent url(/images/green-strip.png);
+  height: 36px;
+  font-size: 150%;
   text-align: left;
+  color: #FFFFFF;
+  padding: 0px 100px;
 }
 
 #rect3 {
-  width: 954px;
-  border: 1px solid #EAEDE1;
-  margin: 10px 1px;
   padding: 30px 10px;
 }
 
