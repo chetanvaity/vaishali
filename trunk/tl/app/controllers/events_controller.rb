@@ -49,27 +49,30 @@ class EventsController < ApplicationController
     anchorDate = nil
 
     # get new date range
-    abs_min_date = Event.minimum("start")
-    abs_max_date = [Event.maximum("start"), Event.maximum("end")].max
+    abs_min_date = Event.minimum("start").to_date
+    abs_max_date = [Event.maximum("start"), Event.maximum("end")].max.to_date
     if session[:max_date] && session[:min_date] && move
       min_date = session[:min_date]
       max_date = session[:max_date]
       range = session[:max_date] - session[:min_date]
-      range = 24*60*60 if range == 0 # 1 day if 0
+      range = 1 if range == 0 # 1 day if 0
       case move
       when "in"
-        if range > 24*60*60
-          new_daysrange, intervalUnit1, multiple1 = SimileInterval.get_smaller_interval(
+        if range > 1
+          new_daysrange, intervalUnit1, multiple1 = 
+                    SimileInterval.get_smaller_interval(
                       session[:interval_unit1], session[:multiple1])
-          range_diff = (range - (new_daysrange*24*60*60))/2
+          range_diff = (range - new_daysrange)/2
           min_date = session[:min_date] + range_diff
           max_date = session[:max_date] - range_diff
         end
       when "out"
-        if session[:min_date] > abs_min_date || session[:max_date] < abs_max_date
-          new_daysrange, intervalUnit1, multiple1 = SimileInterval.get_larger_interval(
+        if session[:min_date] > abs_min_date || 
+            session[:max_date] < abs_max_date
+          new_daysrange, intervalUnit1, multiple1 = 
+                    SimileInterval.get_larger_interval(
                       session[:interval_unit1], session[:multiple1])
-          range_diff = (new_daysrange*24*60*60 - range)/2
+          range_diff = (new_daysrange - range)/2
           min_date = session[:min_date] - range_diff
           max_date = session[:max_date] + range_diff
         end
@@ -97,7 +100,7 @@ class EventsController < ApplicationController
 
     # set interval units for the date range
     if intervalUnit1.nil?
-      days_range = (max_date - min_date)/(24*60*60)
+      days_range = max_date - min_date
       intervalUnit1, multiple1 = SimileInterval.map_range_to_interval(days_range)
     end
     intervalUnit2, multiple2 = intervalUnit1, multiple1*5

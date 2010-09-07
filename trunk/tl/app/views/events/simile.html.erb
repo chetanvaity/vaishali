@@ -117,7 +117,7 @@
         var bandInfos = [
           Timeline.createBandInfo({
              eventSource:    eventSource,
-             date:           "<%= session[:anchor_date] %>",
+             date:           "<%= session[:anchor_date].strftime('%a %b %d %Y') %>",
              width:          "85%", 
              intervalUnit:   Timeline.DateTime.<%= session[:interval_unit1] %>,
              multiple:       <%= session[:multiple1] %>,
@@ -127,7 +127,7 @@
              }),
           Timeline.createBandInfo({
              eventSource:    eventSource,
-             date:           "<%= session[:anchor_date] %>",
+             date:           "<%= session[:anchor_date].strftime('%a %b %d %Y') %>",
              width:          "15%", 
              intervalUnit:   Timeline.DateTime.<%= session[:interval_unit2] %>,
              multiple:       <%= session[:multiple2] %>,
@@ -147,6 +147,8 @@
         Timeline._Band.prototype._onMouseDown=function(B,A,C){
           this.closeBubble();
           this._dragging = false;
+        };
+        Timeline._Band.prototype._onDblClick=function(C,B,E){
         };
       }
 
