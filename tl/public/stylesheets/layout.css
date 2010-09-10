@@ -4,6 +4,7 @@ body {
   font-size: 14px;
   margin: 0;
   padding: 0;
+  background: #e5f8a7;
 }
 
 #centerbox {
@@ -11,24 +12,14 @@ body {
 }
 
 #rect1 {
-  height: 100px;
+  height: 50px;
   width: 800px;
 }
 #rect11 {
-  height: 30px;
+  height: 20px;
   width: 200px;
-  border: 1px solid black;
   float: right;
-}
-#rect12 {
-  height: 70px;
-  width: 800px;
-}
-#rect13 {
-  height: 30px;
-  border: 1px solid black;
-  width: 400px;
-  float: right;
+  background: #FFFFFF;
 }
 
 #rect2 {
@@ -41,7 +32,8 @@ body {
 }
 
 #rect3 {
-  padding: 30px 10px;
+  padding: 40px 10px;
+  width: 900px;
 }
 
 /* Popup Divs */
