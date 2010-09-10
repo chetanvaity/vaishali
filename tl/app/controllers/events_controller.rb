@@ -134,6 +134,7 @@ class EventsController < ApplicationController
     # TBD: Verify params
     
     @event = Event.new(params[:event])
+    @event.importance = @event.search_volume
     flash[:notice] = "Event created successfully!"
     if @event.save
       respond_to do |format|
