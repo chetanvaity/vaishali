@@ -114,6 +114,24 @@
     background: url(/images/new-button.png) no-repeat;
     cursor: pointer;
 }
+#zoomin-button {
+    /*position: relative;*/
+    height: 16px;
+    width: 16px;
+    float: left;
+    /*margin: 0px;*/
+    background: url(/images/new-button.png) no-repeat;
+    cursor: pointer;
+}
+#zoomout-button {
+    /*position: relative;*/
+    height: 16px;
+    width: 16px;
+    float: left;
+    /*margin: 0px;*/
+    background: url(/images/new-button.png) no-repeat;
+    cursor: pointer;
+}
 
 div.edit-event {
     float: right;
