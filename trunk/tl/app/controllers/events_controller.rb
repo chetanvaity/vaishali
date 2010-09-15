@@ -103,7 +103,8 @@ class EventsController < ApplicationController
       days_range = max_date - min_date
       intervalUnit1, multiple1 = SimileInterval.map_range_to_interval(days_range)
     end
-    intervalUnit2, multiple2 = intervalUnit1, multiple1*5
+    days_range2, intervalUnit2, multiple2 = SimileInterval.get_larger_interval(
+                                              intervalUnit1, multiple1)
 
     # store in session
     session[:min_date] = min_date
@@ -113,6 +114,12 @@ class EventsController < ApplicationController
     session[:multiple1] = multiple1
     session[:interval_unit2] = intervalUnit2
     session[:multiple2] = multiple2
+
+    session[:canmovein] = (session[:max_date] - session[:min_date] > 1)
+    session[:canmoveout] = (session[:min_date] > abs_min_date || 
+                            session[:max_date] < abs_max_date)
+    session[:canmoveleft] = (session[:min_date] > abs_min_date) 
+    session[:canmoveright] = (session[:max_date] < abs_max_date) 
 
     return events
   end

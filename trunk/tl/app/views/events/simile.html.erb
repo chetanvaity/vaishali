@@ -105,6 +105,26 @@
         $(".historicaldate").attr("title", "15 Aug 1947<br>December 1755<br>1005 AD<br>232 BC");
         $(".historicaldate").tooltip({ position: "center right" });
 
+        /* disable move in, out, left or right buttons if further movement 
+        is not possible */
+
+        <% if not session[:canmovein] %>
+          $('a[href="?move=in"]').click(function() { return false; });
+          $('a[href="?move=in"]').css('cursor','auto');
+        <% end %>
+        <% if not session[:canmoveout] %>
+          $('a[href="?move=out"]').click(function() { return false; });
+          $('a[href="?move=out"]').css('cursor','auto');
+        <% end %>
+        <% if not session[:canmoveleft] %>
+          $('a[href="?move=left"]').click(function() { return false; });
+          $('a[href="?move=left"]').css('cursor','auto');
+        <% end %>
+        <% if not session[:canmoveright] %>
+          $('a[href="?move=right"]').click(function() { return false; });
+          $('a[href="?move=right"]').css('cursor','auto');
+        <% end %>
+           
       });
     </script>
     
