@@ -1,40 +1,146 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+  -moz-background-clip:border;
+  -moz-background-inline-policy:continuous;
+  -moz-background-origin:padding;
+  background:transparent none repeat scroll 0 0;
+  border:0 none;
+  font-size:100%;
+  margin:0;
+  outline-color:-moz-use-text-color;
+  outline-style:none;
+  outline-width:0;
+  padding:0;
+  text-decoration:none;
+  vertical-align:baseline;
+}
+
 body {
-  color: #000000;
-  font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+  background-color: #FDFFE1;
+  color: #645951; 
+  font-family: "Helvetica Neue",Arial,Helvetica,sans-serif;
   font-size: 14px;
-  margin: 0;
-  padding: 0;
-  background: #e5f8a7;
-}
-
-#centerbox {
-  margin: auto;
-}
-
-#rect1 {
-  height: 50px;
-  width: 800px;
-}
-#rect11 {
-  height: 20px;
-  width: 200px;
-  float: right;
-  background: #FFFFFF;
-}
-
-#rect2 {
-  background: transparent url(/images/green-strip.png);
-  height: 36px;
-  font-size: 150%;
+  line-height: 1.5;
+  margin: 0 auto;
+  position: relative;
   text-align: left;
-  color: #FFFFFF;
-  padding: 0px 100px;
 }
 
-#rect3 {
-  padding: 40px 10px;
-  width: 900px;
+#contact {
+  background-color: #A0CB29;
+  color: #FFFFFF;
 }
+
+.section {
+  clear: both;
+}
+
+#contact .contents {
+  background-color:#90B623;
+  color:#FFFFFF;
+  min-height:2.1428em;
+}
+
+#contact address {
+  background-color:transparent;
+  color:#FFFFFF;
+  display:inline;
+  line-height:2.1428;
+  padding-left:1.4286em;
+  font-style: normal;
+}
+
+.contents {
+  clear:both;
+  margin:0 auto;
+  max-width:78em;
+  min-width:54em;
+  overflow:hidden;
+  position:relative;
+  text-align:left;
+  width:90%;
+}
+
+#header {
+  background-color: #FBFAF8;
+  border-bottom: 6px solid #F4F3E0;
+  border-top: 5px solid #F4F3E0;
+  height: 87px;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 5;
+}
+
+#header .contents {
+  overflow: visible;
+}
+
+#logo {
+  display:inline;
+  float:left;
+  margin-top:15px;
+  width:212px;
+}
+
+#logo a:link, #logo a:visited, #logo a:hover, #logo a:focus, #logo a:active {
+  background-color:transparent;
+  border-bottom:medium none;
+}
+
+a:active {
+  background-color:transparent;
+  border-bottom:medium none;
+}
+
+a:visited {
+  border-bottom:1px solid #8FA52D;
+  color:#8FA52D;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+.preamble {
+  background-color:#D7ECE1;
+  background-image:url(/images/bluish.gif);
+  background-position:center top;
+  background-repeat:repeat-x;
+}
+
+.flow {
+  clear:both;
+  margin:0 auto;
+  max-width:78em;
+  min-width:54em;
+  overflow:hidden;
+  position:relative;
+  text-align:left;
+  width:90%;
+}
+
+.flow .contents {
+  clear:both;
+  margin:0 0 0 20px;
+  max-width:inherit;
+  min-width:52em;
+  overflow:hidden;
+  padding-bottom:1em;
+  position:relative;
+  width:auto;
+}
+
+.block-image {
+  margin-top:2.5em;
+}
+
+a.block-image:link, a.block-image:visited, a.block-image:hover, a.block-image:focus, a.block-image:active {
+  -moz-background-clip:border;
+  -moz-background-inline-policy:continuous;
+  -moz-background-origin:padding;
+  background:transparent none repeat scroll 0 0;
+  border:medium none;
+}
+a.block-image img {
+}
+
 
 /* Popup Divs */
 .bgPopup {

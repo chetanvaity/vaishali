@@ -22,20 +22,27 @@
 
 <body onload="onLoad();" onresize="onResize();">
 
-<div id="centerbox" align="center">
+<div id="contact" class="section">
+  <div class="contents">
+    <address>Hello user</address>
+  </div>
+</div>
 
-  <div id="rect1">
-    <div id="rect11"></div>
+<div id="header" class="section">
+  <div class="contents">
+    <div id="logo">
+      <a href="/tl"><img alt="Timeline" src="/images/logo.gif"></a>
+    </div>
   </div>
-  <div id="rect2">
-      Timeline
-  </div>
-  <div id="rect3" align="center">
-  <%= yield %>
-  </div>
+</div>
 
-</div> <!-- master ends -->
+<div class="section preamble">
+  <div class="flow">
+    <div class="contents">
+      <%= yield %>
+    </div>
+  </div>
+</div>
 
 </body>
-
 </html>
