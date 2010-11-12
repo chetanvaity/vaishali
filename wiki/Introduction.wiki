@@ -1,7 +1,3 @@
-#summary What is this?
-
-= Introduction =
-
 I have always wanted to have a timeline of historical events which allows addition of events by all - something like Wikipedia. The hope is that such a project will result in a large set of events.
 
 Such a timeline will have the following basic features:
@@ -10,10 +6,4 @@ Such a timeline will have the following basic features:
 
 I believe such a tool will give students of history and interested individuals a better understanding of historical events and the timescales involved.
 
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Look at the [Requirements Requirements wiki page] for some more detailed Requirements.
