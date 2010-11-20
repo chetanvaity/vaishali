@@ -8,7 +8,7 @@ Want to contribute in development? Here's how to get started.
 1.
 You will need Linux with *Ruby 1.8.7*
 
-The following Ruby gems are needed. The versions are important.
+The following Ruby gems are needed. (Rails version >= 3.0.0.rc2 should work)
   * abstract (1.0.0)
   * actionmailer (3.0.0.rc2)
   * actionpack (3.0.0.rc2)
