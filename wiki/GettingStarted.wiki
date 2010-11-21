@@ -39,6 +39,10 @@ Get the source using svn from here http://code.google.com/p/vaishali/source/chec
 
 3.
 The source contains a directory called "tl". This is the RoR project.
+
+Load sample events
+$ rake db:fixtures:load
+
 Start the rails web server with this command
 {{{
 chetanv@valmiki:~/work/vaishali/tl$ ./script/rails server
