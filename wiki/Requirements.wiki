@@ -10,7 +10,7 @@
       * ~~Rectangular boundary of timeline box (or not)~~
       * Overall look
     * Left and right movement of timeline
-    * Zoom in/out
+    * ~~Zoom in/out~~
     * Simile
       * ~~Change lineColor for instant events, it doesn’t change from blue~~
       * ~~Change color of labels~~
