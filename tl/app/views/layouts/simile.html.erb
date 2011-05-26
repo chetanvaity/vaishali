@@ -31,18 +31,22 @@
 <div id="header" class="section">
   <div class="contents">
     <div id="logo">
-      <a href="/tl"><img alt="Timeline" src="/images/logo.gif"></a>
+      <a href="/tl"><img alt="Timeline" src="/images/logo-text.gif"></a>
     </div>
   </div>
 </div>
 
-<div class="section preamble">
-  <div class="flow">
-    <div class="contents">
-      <%= yield %>
-    </div>
+<div id="orangeline"></div>
+
+<div class="flow">
+  <div class="contents">
+    <%= yield %>
   </div>
+    <p class="footer" align="center">
+      About Us * Contact Us
+    </p>
 </div>
+
 
 </body>
 </html>

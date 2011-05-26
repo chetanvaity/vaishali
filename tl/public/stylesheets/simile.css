@@ -6,7 +6,7 @@
 /* ether bands properties */
 
 .timeline-ether-bg{width:100%; height:100%;}
-.timeline-band-0 .timeline-ether-bg{background-color:#eaddb2}
+.timeline-band-0 .timeline-ether-bg{background-color:#edf6d6}
 .timeline-band-1 .timeline-ether-bg{background-color:#90B623}
 .timeline-band-2 .timeline-ether-bg{background-color:#D8CAA8}
 
@@ -81,47 +81,37 @@
 #my-timeline {
   height: 320px;
   width: 800px;
-  border-width: 8px;
+  border-width: 2px;
   border-style: solid;
   border-color: #FFFFFF;
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 0.7em;
+  margin: 5px;
   color: #183604;
 }
 
 #buttons {
-    /*position: relative;
-    left: -350px;*/
-    /*height: 18px;*/
-    width: 16px;
-    height: 300px;
     color: #183604;
 }
 
 #new-event-button {
-    /*position: relative;*/
     height: 16px;
     width: 16px;
-    float: left;
-    /*margin: 0px;*/
+    float: right;
     background: url(/images/new-button.png) no-repeat;
     cursor: pointer;
 }
 #zoomin-button {
-    /*position: relative;*/
     height: 16px;
     width: 16px;
-    float: left;
-    /*margin: 0px;*/
+    float: right;
     background: url(/images/new-button.png) no-repeat;
     cursor: pointer;
 }
 #zoomout-button {
-    /*position: relative;*/
     height: 16px;
     width: 16px;
-    float: left;
-    /*margin: 0px;*/
+    float: right;
     background: url(/images/new-button.png) no-repeat;
     cursor: pointer;
 }
@@ -139,11 +129,9 @@ div.delete-event {
 }
 
 #button-terminator {
-    /*position: relative;*/
-    /*float: left;*/
     height: 16px;
     width: 16px;
-    float: left;
+    float: right;
     background: url(/images/terminator.png) no-repeat;
 }
 
