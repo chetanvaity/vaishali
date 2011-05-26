@@ -9,7 +9,7 @@
       * ~~Vertical time bars - decide on good time units~~
       * ~~Rectangular boundary of timeline box (or not)~~
       * Overall look
-    * Left and right movement of timeline
+    * ~~Left and right movement of timeline~~
     * ~~Zoom in/out~~
     * Simile
       * ~~Change lineColor for instant events, it doesn’t change from blue~~
@@ -25,8 +25,8 @@
       * ~~Simple CRUD pages for events~~
       * Multiple users simultaneously
     * Functionality
-      * Move left and right
-      * Zoom
+      * ~~Move left and right~~
+      * ~~Zoom~~
       * Image with event
     * Support BC/AD
 
