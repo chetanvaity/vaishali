@@ -1,5 +1,5 @@
-<div id="timeline-with-buttons" align="center">
- 
+<div id="timeline-with-buttons" align="center"> 
+
     <div id="newBgPopup" class="bgPopup"></div>
     <div id="newPopup" class="popup">
       <a id="newPopupClose" class="popupClose">x</a>  
@@ -18,24 +18,26 @@
       <%= render :partial => "delete" %> 
     </div>
 
+    <!-- timeline with buttons start -->
     <table style="border-spacing:0px 0px;"}><tr>
 	    <td class="center-image">
-        <a class="block-image" href="?move=left"><img src="/images/left-arrow-black.png"></a>
+        <span id="moveleft-button" class="block-image"><img src="/images/left-arrow-black.png"></span>
       </td>
       <td>
         <div id="buttons">
           <span id="new-event-button"></span>
-          <a href="?move=in"><span id="zoomin-button"></span></a>
-          <a href="?move=out"><span id="zoomout-button"></span></a>
+          <span id="zoomout-button"></span>
+          <span id="zoomin-button"></span>
           <span id="button-terminator"></span>
           <span class="clear"></span>
         </div>
         <div id="my-timeline"></div>
 	    </td>
       <td class="center-image">
-        <a class="block-image" href="?move=right"><img src="/images/right-arrow-black.png"></a>
+        <span id="moveright-button" class="block-image"><img src="/images/right-arrow-black.png"></span>
       </td>
     </tr></table>
+    <!-- timeline with buttons end -->
 
     <noscript>
     This page uses Javascript to show you a Timeline. Please enable Javascript in your browser to see the full page. Thank you.
@@ -50,6 +52,144 @@
       function close_popup(name) {
         $('#'+name+'BgPopup').fadeOut('fast');
         $('#'+name+'Popup').fadeOut('fast');
+      }
+
+      function createTimeline() {
+        // create the simile timeline
+        var eventSource = new Timeline.DefaultEventSource();
+        var theme = Timeline.ClassicTheme.create(); // create the theme
+        theme.event.track.gap = 4;
+        theme.event.track.height = 8;
+        theme.event.tape.height = 8;
+        theme.event.duration.color = "#1e490e";
+        theme.event.instant.icon = "images/green-circle.png";
+        //theme.event.label.lineColor = "#225915"; - NOT WORKING
+        theme.event.label.width = 400;
+        theme.event.label.offsetFromLine = 7;
+
+        var bandInfos = [
+          Timeline.createBandInfo({
+             eventSource:    eventSource,
+             date:           "<%= session[:anchor_date].strftime('%a %b %d %Y') %>",
+             width:          "85%", 
+             intervalUnit:   Timeline.DateTime.<%= session[:interval_unit1] %>,
+             multiple:       <%= session[:multiple1] %>,
+             intervalPixels: 50/<%= session[:multiple1] %>,
+             theme:          theme,
+             backgroundColor: "#D8CAA8"
+             }),
+          Timeline.createBandInfo({
+             eventSource:    eventSource,
+             date:           "<%= session[:anchor_date].strftime('%a %b %d %Y') %>",
+             width:          "15%", 
+             intervalUnit:   Timeline.DateTime.<%= session[:interval_unit2] %>,
+             multiple:       <%= session[:multiple2] %>,
+             intervalPixels: 100/<%= session[:multiple2] %>,
+             theme:          theme,
+             layout:         'overview'
+             })
+        ];
+        bandInfos[1].syncWith = 0;
+        bandInfos[1].highlight = true;
+
+        tl = Timeline.create(document.getElementById("my-timeline"), bandInfos);
+        Timeline.loadXML("simile.gen.xml", function(xml, url) { eventSource.loadXML(xml, url); });
+
+        // disable draggability by overriding _onMouseDown function removing 
+        // any dragging related functionality
+        Timeline._Band.prototype._onMouseDown=function(B,A,C){
+          this.closeBubble();
+          this._dragging = false;
+        };
+        Timeline._Band.prototype._onDblClick=function(C,B,E){
+        };
+      }
+
+      var resizeTimerID = null;
+      function onResize() {
+         if (resizeTimerID == null) {
+             resizeTimerID = window.setTimeout(function() {
+                 resizeTimerID = null;
+                 tl.layout();
+             }, 500);
+         }
+      }
+
+      function refreshButtons(movein, moveout, moveleft, moveright) {
+        if (movein) {
+          $("#zoomin-button").css('cursor','pointer');
+          $("#zoomin-button").unbind('click').bind('click', function() {
+            jQuery.ajax({
+              url: "/tl",
+              data: { move: "in" },
+              success: function(data) {
+                createTimeline();
+                refreshButtons(data["canmovein"], data["canmoveout"],
+                               data["canmoveleft"], data["canmoveright"]);
+              }
+            });
+          });
+        } else {
+          $("#zoomin-button").css('cursor','auto');
+          $("#zoomin-button").unbind('click').bind('click', function() { return false; });
+        }
+        if (moveout) {
+          $("#zoomout-button").css('cursor','pointer');
+          $("#zoomout-button").unbind('click').bind('click', function() {
+            jQuery.ajax( {
+              url: "/tl",
+              data: { move: "out" },
+              success: function(data) {
+                createTimeline();
+                refreshButtons(data["canmovein"], data["canmoveout"],
+                               data["canmoveleft"], data["canmoveright"]);
+              }
+            } );
+          });
+        } else {
+          $("#zoomout-button").css('cursor','auto');
+          $("#zoomout-button").unbind('click').bind('click', function() {
+            return false;
+          });
+        } 
+        if (moveleft) {
+          $('#moveleft-button').css('cursor','pointer');
+          $("#moveleft-button").unbind('click').bind('click', function() {
+            jQuery.ajax( {
+              url: "/tl",
+              data: { move: "left" },
+              success: function(data) {
+                createTimeline();
+                refreshButtons(data["canmovein"], data["canmoveout"],
+                               data["canmoveleft"], data["canmoveright"]);
+              }
+            } );
+          });
+        } else {
+          $('#moveleft-button').css('cursor','auto');
+          $("#moveleft-button").unbind('click').bind('click', function() {
+            return false;
+          });
+        }
+        if (moveright) {
+          $('#moveright-button').css('cursor','pointer');
+          $("#moveright-button").unbind('click').bind('click', function() {
+            jQuery.ajax( {
+              url: "/tl",
+              data: { move: "right" },
+              success: function(data) {
+                createTimeline();
+                refreshButtons(data["canmovein"], data["canmoveout"],
+                               data["canmoveleft"], data["canmoveright"]);
+              }
+            } );
+          });
+        } else {
+          $('#moveright-button').css('cursor','auto');
+          $("#moveright-button").unbind('click').bind('click', function() {
+            return false;
+          });
+        }
       }
 
       $(document).ready(function(){  
@@ -103,88 +243,12 @@
         $(".historicaldate").attr("title", "15 Aug 1947<br>December 1755<br>1005 AD<br>232 BC");
         $(".historicaldate").tooltip({ position: "center right" });
 
-        /* disable move in, out, left or right buttons if further movement 
-        is not possible */
+        var tl;
+        createTimeline();
+        refreshButtons( <%= session[:canmovein] %>,
+                        <%= session[:canmoveout] %>,
+                        <%= session[:canmoveleft] %>,
+                        <%= session[:canmoveright] %>);
+     });
 
-        <% if not session[:canmovein] %>
-          $('a[href="?move=in"]').click(function() { return false; });
-          $('a[href="?move=in"]').css('cursor','auto');
-        <% end %>
-        <% if not session[:canmoveout] %>
-          $('a[href="?move=out"]').click(function() { return false; });
-          $('a[href="?move=out"]').css('cursor','auto');
-        <% end %>
-        <% if not session[:canmoveleft] %>
-          $('a[href="?move=left"]').click(function() { return false; });
-          $('a[href="?move=left"]').css('cursor','auto');
-        <% end %>
-        <% if not session[:canmoveright] %>
-          $('a[href="?move=right"]').click(function() { return false; });
-          $('a[href="?move=right"]').css('cursor','auto');
-        <% end %>
-           
-      });
-    </script>
-    
-    <script>
-      var tl;
-      function onLoad() {
-        // create the simile timeline
-        var eventSource = new Timeline.DefaultEventSource();
-        var theme = Timeline.ClassicTheme.create(); // create the theme
-        theme.event.track.gap = 8;
-        theme.event.track.height = 1;
-        theme.event.duration.color = "#998000";
-        theme.event.instant.icon = "images/green-circle.png";
-        //theme.event.label.lineColor = "#225915"; - NOT WORKING
-        theme.event.label.width = 400;
-        theme.event.label.offsetFromLine = 7;
-
-        var bandInfos = [
-          Timeline.createBandInfo({
-             eventSource:    eventSource,
-             date:           "<%= session[:anchor_date].strftime('%a %b %d %Y') %>",
-             width:          "85%", 
-             intervalUnit:   Timeline.DateTime.<%= session[:interval_unit1] %>,
-             multiple:       <%= session[:multiple1] %>,
-             intervalPixels: 50/<%= session[:multiple1] %>,
-             theme:          theme,
-             backgroundColor: "#D8CAA8"
-             }),
-          Timeline.createBandInfo({
-             eventSource:    eventSource,
-             date:           "<%= session[:anchor_date].strftime('%a %b %d %Y') %>",
-             width:          "15%", 
-             intervalUnit:   Timeline.DateTime.<%= session[:interval_unit2] %>,
-             multiple:       <%= session[:multiple2] %>,
-             intervalPixels: 100/<%= session[:multiple2] %>,
-             theme:          theme,
-             layout:         'overview'
-             })
-        ];
-        bandInfos[1].syncWith = 0;
-        bandInfos[1].highlight = true;
-
-        tl = Timeline.create(document.getElementById("my-timeline"), bandInfos);
-        Timeline.loadXML("simile.gen.xml", function(xml, url) { eventSource.loadXML(xml, url); });
-
-        // disable draggability by overriding _onMouseDown function removing 
-        // any dragging related functionality
-        Timeline._Band.prototype._onMouseDown=function(B,A,C){
-          this.closeBubble();
-          this._dragging = false;
-        };
-        Timeline._Band.prototype._onDblClick=function(C,B,E){
-        };
-      }
-
-      var resizeTimerID = null;
-      function onResize() {
-         if (resizeTimerID == null) {
-             resizeTimerID = window.setTimeout(function() {
-                 resizeTimerID = null;
-                 tl.layout();
-             }, 500);
-         }
-      }
     </script>
