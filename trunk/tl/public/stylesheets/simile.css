@@ -106,14 +106,12 @@
     width: 16px;
     float: right;
     background: url(/images/new-button.png) no-repeat;
-    cursor: pointer;
 }
 #zoomout-button {
     height: 16px;
     width: 16px;
     float: right;
     background: url(/images/new-button.png) no-repeat;
-    cursor: pointer;
 }
 
 div.edit-event {

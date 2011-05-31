@@ -37,7 +37,11 @@ class EventsController < ApplicationController
     f.close
 
     # render timeline
-    render :layout => "simile"
+    if request.xhr?
+      render :json => session.to_json
+    else
+      render :layout => "simile"
+    end
   end
 
   def get_events(move)
